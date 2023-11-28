@@ -1,16 +1,6 @@
-# Uniswap V3 Periphery
+# Butter DEX Contracts
 
-[![Tests](https://github.com/Uniswap/uniswap-v3-periphery/workflows/Tests/badge.svg)](https://github.com/Uniswap/uniswap-v3-periphery/actions?query=workflow%3ATests)
-[![Lint](https://github.com/Uniswap/uniswap-v3-periphery/workflows/Lint/badge.svg)](https://github.com/Uniswap/uniswap-v3-periphery/actions?query=workflow%3ALint)
-
-This repository contains the periphery smart contracts for the Uniswap V3 Protocol.
-For the lower level core contracts, see the [uniswap-v3-core](https://github.com/Uniswap/uniswap-v3-core)
-repository.
-
-## Bug bounty
-
-This repository is subject to the Uniswap V3 bug bounty program,
-per the terms defined [here](./bug-bounty.md).
+This repository contains the smart contracts for the Butter DEX.
 
 ## Local deployment
 
@@ -32,6 +22,20 @@ import {
 This will ensure that you are testing against the same bytecode that is deployed to
 mainnet and public testnets, and all Uniswap code will correctly interoperate with
 your local deployment.
+
+## Remote deployment
+
+First, you should verify two things:
+
+1. The `POOL_INIT_CODE_HASH` in `components/swap-router-contracts/@butter/v3-periphery/contracts/libraries/PoolAddress.sol`. You can verify this by calling ethers.utils.keccak256() on the `bytecode` of ButterPool.
+2. The various token contract addresses in `components/v3-periphery/contracts/NonfungibleTokenPositionDescriptor.sol`.
+
+Deploy and verify everything to Mantle testnet at once:
+
+```
+export DEPLOYER_PRIVATE_KEY=your private key
+yarn deploy:all
+```
 
 ## Using solidity interfaces
 
